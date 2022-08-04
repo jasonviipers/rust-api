@@ -1,3 +1,4 @@
+use rocket::serde::{Deserialize, Serialize};
 use crate::schema::admin;
 use diesel;
 use diesel::prelude::*;
