@@ -4,12 +4,13 @@ use rocket::request::{self, FromRequest};
 use rocket::{Request, State, Outcome};
 use diesel::postgres::PgConnection;
 use diesel::r2d2::{ConnectionManager, Pool, PooledConnection};
+use dotenv::dotenv;
 
 // An alias to the type for a pool of Diesel Postgres connections.
 pub type PgPool = Pool<ConnectionManager<PgConnection>>;
 
 // The URL to the database, set via the `DATABASE_URL` environment variable.
-pub const DATABASE_URL: &'static str = "DATABASE_URL";
+pub const DATABASE_URL: &'static str = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
 /// Initialize the database pool.
 pub fn init_pool() -> PgPool {
